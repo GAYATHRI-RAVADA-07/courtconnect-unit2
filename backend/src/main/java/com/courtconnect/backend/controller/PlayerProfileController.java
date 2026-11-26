@@ -3,6 +3,7 @@ package com.courtconnect.backend.controller;
 import com.courtconnect.backend.model.PlayerProfile;
 import com.courtconnect.backend.repository.PlayerProfileRepository;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -27,8 +28,10 @@ public class PlayerProfileController {
     }
 
     @GetMapping("/{id}")
-    public PlayerProfile getPlayerProfileById(@PathVariable Long id){
-        return playerProfileRepository.findById(id).orElse(null);
+    public ResponseEntity<PlayerProfile> getPlayerProfileById(@PathVariable Long id){
+        return playerProfileRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }
