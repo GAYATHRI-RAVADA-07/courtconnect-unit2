@@ -4,6 +4,7 @@ import com.courtconnect.backend.model.PlayerProfile;
 import com.courtconnect.backend.repository.PlayerProfileRepository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class PlayerProfileController {
     }
 
     @PostMapping
-    public PlayerProfile createPlayerProfile(@RequestBody PlayerProfile playerProfile){
+    public PlayerProfile createPlayerProfile(@Valid @RequestBody PlayerProfile playerProfile){
         return playerProfileRepository.save(playerProfile);
     }
 
